@@ -17,3 +17,4 @@
 | 2026-08-12 | [2026-08-12-zengin-sync.md](./2026-08-12-zengin-sync.md) | zengin-code 連携（JSON同期＋口座UI） |
 | 2026-08-12 | [2026-08-12-zengin-name-search.md](./2026-08-12-zengin-name-search.md) | 銀行・支店の名称検索強化 |
 | 2026-08-13 | [2026-08-13-component-midterm.md](./2026-08-13-component-midterm.md) | コンポーネント化（中期）とサーバーインストール対応 |
+| 2026-08-13 | [2026-08-13-zengin-mit-notice.md](./2026-08-13-zengin-mit-notice.md) | 全銀マスタ（zengin-code）の MIT 表記追加 |

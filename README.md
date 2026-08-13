@@ -110,6 +110,16 @@ npm run sync:zengin
 
 `reference/zengin/` に JSON を再生成します（実行時の外部 API 依存なし）。
 
+銀行・支店マスタは [zengin-code](https://github.com/zengin-code/zengin-js)（MIT License, Copyright (c) 2015 Sho Kusano）を同期して生成しています。ライセンス全文は `reference/zengin/LICENSE-zengin-code.txt` を参照してください。生成 JSON を再配布する場合も、同ライセンス表記を同梱してください。
+
+## 郵便番号・住所検索
+
+住所の郵便番号検索は、リポジトリ内に郵便番号簿を同梱せず、実行時に [zipcloud 郵便番号検索 API](https://zipcloud.ibsnet.co.jp/)（株式会社アイビス）を呼び出しています。
+
+- API 利用条件: [郵便番号検索API利用規約](https://zipcloud.ibsnet.co.jp/rule/api)（MIT ではない。規約への同意が前提。ライセンスは提供者側の判断で終了し得る）
+- データの出所: 日本郵便が公開する郵便番号データ（zipcloud が再配信）。[日本郵便の説明](https://www.post.japanpost.jp/service/search/zipcode/download/readme.html)では、郵便番号データに限っては著作権を主張せず自由に配布してよいとされています
+- 本フォームではマスタ JSON を再配布していないため、全銀のようなライセンスファイル同梱は不要です。利用・商用展開時は zipcloud 規約を確認してください
+
 ## 設計ドキュメント
 
 - `docs/personal-data-interface.md`
