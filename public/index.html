@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="brand">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Personal Info Form — Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles/base.css" />
+  <link id="pinfo-theme-css" rel="stylesheet" href="/styles/themes/brand.css" />
+  <style>
+    .demo-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+    }
+    .demo-bar h1 {
+      margin: 0;
+      font-size: 1rem;
+    }
+    .demo-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .demo-controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.85rem;
+      margin: 0;
+    }
+    .demo-controls select,
+    .demo-controls button {
+      min-height: 36px;
+      padding: 0.35rem 0.7rem;
+      font: inherit;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fff;
+      cursor: pointer;
+    }
+    .demo-sections {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.75rem;
+      width: 100%;
+      font-size: 0.8rem;
+    }
+    #mount {
+      padding-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-bar">
+    <h1>Personal Info Form（コンポーネントデモ）</h1>
+    <div class="demo-controls">
+      <label>
+        テーマ
+        <select id="theme-select">
+          <option value="brand">brand</option>
+          <option value="bootstrap">bootstrap</option>
+          <option value="material">material</option>
+        </select>
+      </label>
+      <button type="button" id="btn-validate">validate()</button>
+      <button type="button" id="btn-getvalue">getValue()</button>
+    </div>
+    <div class="demo-sections" id="section-toggles"></div>
+  </div>
+
+  <div id="mount"></div>
+
+  <script src="/src/personal-info-form.js"></script>
+  <script>
+    (async () => {
+      const sections = [...PersonalInfoForm.ALL_SECTIONS];
+      const toggles = document.getElementById("section-toggles");
+      sections.forEach((name) => {
+        const label = document.createElement("label");
+        label.innerHTML = `<input type="checkbox" value="${name}" checked /> ${name}`;
+        toggles.appendChild(label);
+      });
+
+      const api = await PersonalInfoForm.mount("#mount", {
+        theme: "brand",
+        sections,
+        baseUrl: "",
+        requireEmailVerification: true,
+      });
+      window.formApi = api;
+
+      document.getElementById("theme-select").addEventListener("change", (e) => {
+        api.setTheme(e.target.value);
+      });
+
+      toggles.addEventListener("change", () => {
+        const enabled = [...toggles.querySelectorAll("input:checked")].map(
+          (el) => el.value
+        );
+        api.setSections(enabled);
+      });
+
+      document.getElementById("btn-validate").addEventListener("click", () => {
+        alert(api.validate() ? "validate: OK" : "validate: NG");
+      });
+      document.getElementById("btn-getvalue").addEventListener("click", () => {
+        console.log(api.getValue());
+        alert("getValue() を console に出力しました");
+      });
+    })().catch((err) => {
+      console.error(err);
+      document.getElementById("mount").textContent = String(err);
+    });
+  </script>
+</body>
+</html>

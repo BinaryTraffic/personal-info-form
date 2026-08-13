@@ -1,0 +1,40 @@
+{
+  "name": "personal-info-form",
+  "version": "0.2.0",
+  "description": "個人情報に特化した入力フォームコンポーネント（テーマ・セクション設定対応）",
+  "private": false,
+  "type": "module",
+  "main": "src/personal-info-form.js",
+  "files": [
+    "app.js",
+    "js/",
+    "src/",
+    "styles/",
+    "public/",
+    "reference/zengin/README.md",
+    "scripts/",
+    "server.mjs",
+    "README.md",
+    "docs/",
+    "history/"
+  ],
+  "scripts": {
+    "start": "node server.mjs",
+    "sync:zengin": "node scripts/sync-zengin.mjs",
+    "postinstall": "npm run sync:zengin",
+    "pack:install": "npm pack"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "zengin-code": "^1.0.0-p20260630"
+  },
+  "keywords": [
+    "personal-info",
+    "form",
+    "zengin",
+    "japan"
+  ],
+  "license": "UNLICENSED"
+}

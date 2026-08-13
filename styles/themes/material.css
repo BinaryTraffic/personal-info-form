@@ -1,0 +1,62 @@
+/* Material / Google-inspired theme */
+:root,
+[data-theme="material"] {
+  --ink: #202124;
+  --ink-muted: #5f6368;
+  --paper: #f1f3f4;
+  --surface: #ffffff;
+  --line: #dadce0;
+  --accent: #1a73e8;
+  --accent-deep: #174ea6;
+  --accent-soft: #d2e3fc;
+  --warn: #d93025;
+  --focus: #1a73e8;
+  --valid: #1e8e3e;
+  --valid-border: #1e8e3e;
+  --invalid: #d93025;
+  --invalid-border: #d93025;
+  --radius: 8px;
+  --shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  --font: "Google Sans", "Noto Sans JP", Roboto, Arial, sans-serif;
+  --control-h: 56px;
+  --page-bg: #f8f9fa;
+  --btn-primary-bg: #1a73e8;
+  --btn-primary-border: #1a73e8;
+}
+
+[data-theme="material"] body {
+  background: var(--page-bg);
+}
+
+[data-theme="material"] .section {
+  border: 0;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+[data-theme="material"] .float-control input,
+[data-theme="material"] .float-control select {
+  border-radius: 4px 4px 0 0;
+  border-width: 0 0 2px 0;
+  background: #f1f3f4;
+}
+
+[data-theme="material"] .float-control input:focus,
+[data-theme="material"] .float-control select:focus {
+  background: #e8f0fe;
+  box-shadow: none;
+  border-bottom-color: var(--accent);
+}
+
+[data-theme="material"] .btn-primary {
+  background: var(--btn-primary-bg);
+  border-color: var(--btn-primary-border);
+  border-radius: 24px;
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+
+[data-theme="material"] .btn-ghost,
+[data-theme="material"] .btn-secondary {
+  border-radius: 24px;
+}

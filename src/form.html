@@ -1,0 +1,548 @@
+<form id="personal-info-form" class="needs-validation" novalidate>
+      <!-- メール -->
+      <section class="section" data-section="email" aria-labelledby="sec-email">
+        <h2 id="sec-email">メールアドレス</h2>
+        <p class="section-note">登録時にメールで本人確認を行います。届いたワンタイムコードを入力してください。</p>
+
+        <div class="otp-email-row">
+          <div class="float-field" data-rule="email" data-required="true">
+            <div class="float-control">
+              <input
+                id="email"
+                name="email"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                enterkeyhint="send"
+                placeholder=" "
+                required
+              />
+              <label for="email">メールアドレス<span class="req">必須</span></label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <div class="valid-feedback">正しいメールアドレスです</div>
+            <div class="invalid-feedback"></div>
+          </div>
+          <button type="button" id="otp-send" class="btn-secondary" disabled>認証コードを送信</button>
+        </div>
+
+        <div id="otp-panel" class="otp-panel" hidden>
+          <div class="otp-status" id="otp-status" aria-live="polite"></div>
+
+          <div class="float-field" data-rule="otp" data-required="true">
+            <div class="float-control">
+              <input
+                id="otp-code"
+                name="one-time-code"
+                type="text"
+                inputmode="numeric"
+                pattern="[0-9]*"
+                autocomplete="one-time-code"
+                enterkeyhint="done"
+                placeholder=" "
+                maxlength="4"
+                required
+                disabled
+              />
+              <label for="otp-code">ワンタイムコード（4桁）<span class="req">必須</span></label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <div class="valid-feedback">コードを受け付けました</div>
+            <div class="invalid-feedback"></div>
+          </div>
+
+          <div class="otp-actions">
+            <button type="button" id="otp-verify" class="btn-primary" disabled>コードを確認</button>
+            <button type="button" id="otp-resend" class="btn-ghost" disabled>再送信</button>
+          </div>
+          <p class="hint otp-hint">メールの認証コードは自動入力に対応しています（iOS / Android）。</p>
+        </div>
+
+        <input type="hidden" id="email-verified" name="emailVerified" value="false" />
+        <p id="email-verified-badge" class="verified-badge" hidden>メールアドレス確認済み</p>
+      </section>
+
+      <!-- 氏名 -->
+      <section class="section" data-section="name" aria-labelledby="sec-name">
+        <div class="section-head">
+          <h2 id="sec-name">氏名</h2>
+          <label class="toggle">
+            <input type="checkbox" id="middle-name-toggle" />
+            <span class="toggle-ui" aria-hidden="true"></span>
+            <span class="toggle-label">ミドルネームを入力する</span>
+          </label>
+        </div>
+
+        <p class="name-group-label">漢字（日本語）</p>
+        <div class="grid-name" id="grid-name-kanji">
+          <div class="float-field" data-rule="japanese" data-required="true">
+            <div class="float-control">
+              <input id="name-sei" name="nameSei" type="text" inputmode="text" lang="ja" autocomplete="family-name" enterkeyhint="next" placeholder=" " required />
+              <label for="name-sei">姓<span class="req">必須</span></label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <div class="valid-feedback">入力内容は正しいです</div>
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="float-field middle-only" data-rule="japanese" data-required="false" hidden>
+            <div class="float-control">
+              <input id="name-middle" name="nameMiddle" type="text" inputmode="text" lang="ja" enterkeyhint="next" placeholder=" " disabled />
+              <label for="name-middle">ミドルネーム</label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <div class="valid-feedback">入力内容は正しいです</div>
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="float-field" data-rule="japanese" data-required="true">
+            <div class="float-control">
+              <input id="name-mei" name="nameMei" type="text" inputmode="text" lang="ja" autocomplete="given-name" enterkeyhint="next" placeholder=" " required />
+              <label for="name-mei">名<span class="req">必須</span></label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <div class="valid-feedback">入力内容は正しいです</div>
+            <div class="invalid-feedback"></div>
+          </div>
+        </div>
+
+        <p class="name-group-label">ふりがな（ひらがな）</p>
+        <div class="grid-name" id="grid-name-kana">
+          <div class="float-field" data-rule="hiragana" data-required="true">
+            <div class="float-control">
+              <input id="kana-sei" name="kanaSei" type="text" inputmode="text" lang="ja" enterkeyhint="next" placeholder=" " required />
+              <label for="kana-sei">せい<span class="req">必須</span></label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <div class="valid-feedback">入力内容は正しいです</div>
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="float-field middle-only" data-rule="hiragana" data-required="false" hidden>
+            <div class="float-control">
+              <input id="kana-middle" name="kanaMiddle" type="text" inputmode="text" lang="ja" enterkeyhint="next" placeholder=" " disabled />
+              <label for="kana-middle">みどるねーむ</label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <div class="valid-feedback">入力内容は正しいです</div>
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="float-field" data-rule="hiragana" data-required="true">
+            <div class="float-control">
+              <input id="kana-mei" name="kanaMei" type="text" inputmode="text" lang="ja" enterkeyhint="next" placeholder=" " required />
+              <label for="kana-mei">めい<span class="req">必須</span></label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <div class="valid-feedback">入力内容は正しいです</div>
+            <div class="invalid-feedback"></div>
+          </div>
+        </div>
+
+        <p class="name-group-label">アルファベット（半角英字）</p>
+        <div class="grid-name" id="grid-name-alpha">
+          <div class="float-field" data-rule="alpha" data-required="true">
+            <div class="float-control">
+              <input id="alpha-sei" name="alphaSei" type="text" inputmode="latin" lang="en" autocapitalize="characters" autocomplete="off" spellcheck="false" enterkeyhint="next" placeholder=" " required />
+              <label for="alpha-sei">Surname<span class="req">必須</span></label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <div class="valid-feedback">入力内容は正しいです</div>
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="float-field middle-only" data-rule="alpha" data-required="false" hidden>
+            <div class="float-control">
+              <input id="alpha-middle" name="alphaMiddle" type="text" inputmode="latin" lang="en" autocapitalize="characters" autocomplete="off" spellcheck="false" enterkeyhint="next" placeholder=" " disabled />
+              <label for="alpha-middle">Middle name</label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <div class="valid-feedback">入力内容は正しいです</div>
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="float-field" data-rule="alpha" data-required="true">
+            <div class="float-control">
+              <input id="alpha-mei" name="alphaMei" type="text" inputmode="latin" lang="en" autocapitalize="characters" autocomplete="off" spellcheck="false" enterkeyhint="next" placeholder=" " required />
+              <label for="alpha-mei">Given name<span class="req">必須</span></label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <div class="valid-feedback">入力内容は正しいです</div>
+            <div class="invalid-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 性別 -->
+      <section class="section" data-section="gender" aria-labelledby="sec-gender">
+        <h2 id="sec-gender">性別</h2>
+        <fieldset class="choice-set" data-rule="gender">
+          <legend>性別 <span class="req">必須</span></legend>
+          <div class="choice-row" role="radiogroup" aria-required="true">
+            <label class="choice">
+              <input type="radio" name="gender" value="male" required />
+              <span>男性</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="gender" value="female" />
+              <span>女性</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="gender" value="other" />
+              <span>その他</span>
+            </label>
+          </div>
+          <div class="invalid-feedback">性別を選択してください</div>
+        </fieldset>
+      </section>
+
+      <!-- 生年月日 -->
+      <section class="section" data-section="birth" aria-labelledby="sec-birth">
+        <h2 id="sec-birth">生年月日</h2>
+        <p class="section-note">西暦と和暦は連動します。どちらかを入力すると自動変換されます。</p>
+
+        <div class="calendar-block" data-rule="birth">
+          <h3>西暦</h3>
+          <div class="input-group date-group" role="group" aria-label="西暦の生年月日">
+            <input
+              id="birth-year"
+              name="birthYear"
+              class="date-num date-year"
+              type="text"
+              inputmode="numeric"
+              enterkeyhint="next"
+              placeholder="1990"
+              maxlength="4"
+              aria-label="年"
+              required
+            />
+            <span class="input-group-text date-unit">年</span>
+            <input
+              id="birth-month"
+              name="birthMonth"
+              class="date-num date-month"
+              type="text"
+              inputmode="numeric"
+              enterkeyhint="next"
+              placeholder="01"
+              maxlength="2"
+              aria-label="月"
+              required
+            />
+            <span class="input-group-text date-unit">月</span>
+            <input
+              id="birth-day"
+              name="birthDay"
+              class="date-num date-day"
+              type="text"
+              inputmode="numeric"
+              enterkeyhint="next"
+              placeholder="01"
+              maxlength="2"
+              aria-label="日"
+              required
+            />
+            <span class="input-group-text date-unit">日</span>
+            <span class="date-group-affix" aria-hidden="true">
+              <span class="state-icon date-group-icon"></span>
+            </span>
+          </div>
+          <div class="valid-feedback">有効な生年月日です</div>
+          <div class="invalid-feedback"></div>
+        </div>
+
+        <div class="calendar-block">
+          <h3>和暦</h3>
+          <div class="input-group date-group date-group-wareki" role="group" aria-label="和暦の生年月日">
+            <div class="date-era-cluster">
+              <select id="era" name="era" class="date-era" aria-label="元号">
+                <option value="reiwa">令和</option>
+                <option value="heisei" selected>平成</option>
+                <option value="showa">昭和</option>
+                <option value="taisho">大正</option>
+                <option value="meiji">明治</option>
+              </select>
+              <input
+                id="era-year"
+                name="eraYear"
+                class="date-num date-era-year"
+                type="text"
+                inputmode="numeric"
+                enterkeyhint="next"
+                placeholder="2"
+                maxlength="2"
+                aria-label="和暦の年"
+              />
+            </div>
+            <span class="input-group-text date-unit">年</span>
+            <input
+              id="era-month"
+              name="eraMonth"
+              class="date-num date-month"
+              type="text"
+              inputmode="numeric"
+              enterkeyhint="next"
+              placeholder="01"
+              maxlength="2"
+              aria-label="月"
+            />
+            <span class="input-group-text date-unit">月</span>
+            <input
+              id="era-day"
+              name="eraDay"
+              class="date-num date-day"
+              type="text"
+              inputmode="numeric"
+              enterkeyhint="next"
+              placeholder="01"
+              maxlength="2"
+              aria-label="日"
+            />
+            <span class="input-group-text date-unit">日</span>
+            <span class="date-group-affix" aria-hidden="true"></span>
+          </div>
+          <p id="wareki-display" class="wareki-display" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <!-- 電話番号 -->
+      <section class="section" data-section="phone" aria-labelledby="sec-phone">
+        <h2 id="sec-phone">電話番号</h2>
+        <div class="float-field" data-rule="mobile" data-required="true">
+          <div class="float-control">
+            <input id="tel-mobile" name="telMobile" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="next" placeholder=" " maxlength="11" required />
+            <label for="tel-mobile">携帯電話<span class="req">必須</span></label>
+            <span class="state-icon" aria-hidden="true"></span>
+          </div>
+          <div class="valid-feedback">正しい携帯電話番号です</div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="float-field" data-rule="landline" data-required="false">
+          <div class="float-control">
+            <input id="tel-landline" name="telLandline" type="tel" inputmode="tel" autocomplete="tel-national" enterkeyhint="next" placeholder=" " maxlength="11" />
+            <label for="tel-landline">固定電話</label>
+            <span class="state-icon" aria-hidden="true"></span>
+          </div>
+          <div class="valid-feedback">正しい固定電話番号です</div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="float-field" data-rule="fax" data-required="false">
+          <div class="float-control">
+            <input id="tel-fax" name="telFax" type="tel" inputmode="tel" enterkeyhint="next" placeholder=" " maxlength="11" />
+            <label for="tel-fax">ファックス</label>
+            <span class="state-icon" aria-hidden="true"></span>
+          </div>
+          <div class="valid-feedback">正しい番号です</div>
+          <div class="invalid-feedback"></div>
+        </div>
+      </section>
+
+      <!-- 住所 -->
+      <section class="section" data-section="address" aria-labelledby="sec-address">
+        <h2 id="sec-address">住所</h2>
+        <div class="zip-row">
+          <div class="float-field" data-rule="zip" data-required="true">
+            <div class="float-control">
+              <input id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" enterkeyhint="search" placeholder=" " maxlength="7" required />
+              <label for="zip">郵便番号<span class="req">必須</span></label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <div class="valid-feedback">7桁の郵便番号です</div>
+            <div class="invalid-feedback"></div>
+          </div>
+          <button type="button" id="zip-lookup" class="btn-secondary">住所検索</button>
+        </div>
+        <p id="zip-status" class="zip-status" aria-live="polite"></p>
+
+        <div class="float-field" data-rule="required" data-required="true">
+          <div class="float-control">
+            <input id="prefecture" name="prefecture" type="text" inputmode="text" lang="ja" autocomplete="address-level1" enterkeyhint="next" placeholder=" " required />
+            <label for="prefecture">都道府県<span class="req">必須</span></label>
+            <span class="state-icon" aria-hidden="true"></span>
+          </div>
+          <div class="valid-feedback">入力内容は正しいです</div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="float-field" data-rule="required" data-required="true">
+          <div class="float-control">
+            <input id="city" name="city" type="text" inputmode="text" lang="ja" autocomplete="address-level2" enterkeyhint="next" placeholder=" " required />
+            <label for="city">市区町村<span class="req">必須</span></label>
+            <span class="state-icon" aria-hidden="true"></span>
+          </div>
+          <div class="valid-feedback">入力内容は正しいです</div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="float-field" data-rule="required" data-required="true">
+          <div class="float-control">
+            <input id="town" name="town" type="text" inputmode="text" lang="ja" autocomplete="address-line1" enterkeyhint="next" placeholder=" " required />
+            <label for="town">町域<span class="req">必須</span></label>
+            <span class="state-icon" aria-hidden="true"></span>
+          </div>
+          <div class="valid-feedback">入力内容は正しいです</div>
+          <div class="invalid-feedback"></div>
+        </div>
+        <div class="float-field" data-rule="optional">
+          <div class="float-control">
+            <input id="building" name="building" type="text" inputmode="text" lang="ja" autocomplete="address-line2" enterkeyhint="next" placeholder=" " />
+            <label for="building">番地・建物名など</label>
+            <span class="state-icon" aria-hidden="true"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 銀行口座 -->
+      <section class="section" data-section="bank" aria-labelledby="sec-bank">
+        <h2 id="sec-bank">銀行口座</h2>
+
+        <div class="account-tabs" role="tablist" aria-label="口座種別">
+          <button type="button" class="tab is-active" role="tab" aria-selected="true" data-account="bank" id="tab-bank">銀行口座</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-account="yucho" id="tab-yucho">ゆうちょ銀行</button>
+        </div>
+
+        <div id="panel-bank" class="account-panel" role="tabpanel" aria-labelledby="tab-bank">
+          <div class="float-field zengin-field" data-rule="bankCode" data-required="false">
+            <div class="float-control">
+              <input
+                id="bank-search"
+                type="text"
+                inputmode="search"
+                lang="ja"
+                enterkeyhint="next"
+                placeholder=" "
+                autocomplete="off"
+                aria-autocomplete="list"
+                aria-controls="bank-suggestions"
+                aria-expanded="false"
+              />
+              <label for="bank-search">銀行（コード・名称・カナ）</label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <ul id="bank-suggestions" class="suggest-list" role="listbox" hidden></ul>
+            <input type="hidden" id="bank-code" name="bankCode" value="" />
+            <p id="bank-resolved" class="resolved-label" aria-live="polite"></p>
+            <div class="valid-feedback">銀行コードを選択しました</div>
+            <div class="invalid-feedback"></div>
+          </div>
+
+          <div class="float-field zengin-field" data-rule="branchCode" data-required="false">
+            <div class="float-control">
+              <input
+                id="branch-search"
+                type="text"
+                inputmode="search"
+                lang="ja"
+                enterkeyhint="next"
+                placeholder=" "
+                autocomplete="off"
+                aria-autocomplete="list"
+                aria-controls="branch-suggestions"
+                aria-expanded="false"
+                disabled
+              />
+              <label for="branch-search">支店（コード・名称・カナ）</label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <ul id="branch-suggestions" class="suggest-list" role="listbox" hidden></ul>
+            <input type="hidden" id="branch-code" name="branchCode" value="" />
+            <p id="branch-resolved" class="resolved-label" aria-live="polite"></p>
+            <div class="valid-feedback">支店コードを選択しました</div>
+            <div class="invalid-feedback"></div>
+          </div>
+
+          <fieldset class="choice-set">
+            <legend>口座種別</legend>
+            <div class="choice-row">
+              <label class="choice"><input type="radio" name="accountType" value="ordinary" checked /><span>普通</span></label>
+              <label class="choice"><input type="radio" name="accountType" value="checking" /><span>当座</span></label>
+              <label class="choice"><input type="radio" name="accountType" value="savings" /><span>貯蓄</span></label>
+            </div>
+          </fieldset>
+          <div class="float-field" data-rule="accountNumber">
+            <div class="float-control">
+              <input id="account-number" name="accountNumber" type="text" inputmode="numeric" enterkeyhint="done" placeholder=" " maxlength="8" />
+              <label for="account-number">口座番号（7〜8桁）</label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <div class="valid-feedback">入力内容は正しいです</div>
+            <div class="invalid-feedback"></div>
+          </div>
+          <div class="float-field" data-rule="katakana">
+            <div class="float-control">
+              <input id="account-holder" name="accountHolder" type="text" inputmode="text" lang="ja" enterkeyhint="done" placeholder=" " />
+              <label for="account-holder">口座名義（カナ）</label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <div class="valid-feedback">入力内容は正しいです</div>
+            <div class="invalid-feedback"></div>
+          </div>
+
+          <aside id="bank-account-card" class="account-info-card" aria-live="polite" hidden>
+            <h3 class="account-info-card-title">口座情報</h3>
+            <dl class="account-info-list">
+              <div class="account-info-row">
+                <dt>銀行</dt>
+                <dd id="card-bank">—</dd>
+              </div>
+              <div class="account-info-row">
+                <dt>支店</dt>
+                <dd id="card-branch">—</dd>
+              </div>
+              <div class="account-info-row">
+                <dt>口座種別</dt>
+                <dd id="card-type">—</dd>
+              </div>
+              <div class="account-info-row">
+                <dt>口座番号</dt>
+                <dd id="card-number">—</dd>
+              </div>
+              <div class="account-info-row">
+                <dt>口座名義</dt>
+                <dd id="card-holder">—</dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+
+        <div id="panel-yucho" class="account-panel" role="tabpanel" aria-labelledby="tab-yucho" hidden>
+          <div class="grid-2">
+            <div class="float-field" data-rule="yuchoKigo">
+              <div class="float-control">
+                <input id="yucho-kigo" name="yuchoKigo" type="text" inputmode="numeric" enterkeyhint="next" placeholder=" " maxlength="5" />
+                <label for="yucho-kigo">記号（5桁）</label>
+                <span class="state-icon" aria-hidden="true"></span>
+              </div>
+              <div class="valid-feedback">入力内容は正しいです</div>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="float-field" data-rule="yuchoBango">
+              <div class="float-control">
+                <input id="yucho-bango" name="yuchoBango" type="text" inputmode="numeric" enterkeyhint="done" placeholder=" " maxlength="8" />
+                <label for="yucho-bango">番号</label>
+                <span class="state-icon" aria-hidden="true"></span>
+              </div>
+              <div class="valid-feedback">入力内容は正しいです</div>
+              <div class="invalid-feedback"></div>
+            </div>
+          </div>
+          <div class="float-field" data-rule="katakana">
+            <div class="float-control">
+              <input id="yucho-holder" name="yuchoHolder" type="text" inputmode="text" lang="ja" enterkeyhint="done" placeholder=" " />
+              <label for="yucho-holder">口座名義（カナ）</label>
+              <span class="state-icon" aria-hidden="true"></span>
+            </div>
+            <div class="valid-feedback">入力内容は正しいです</div>
+            <div class="invalid-feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">入力内容を確認</button>
+        <button type="reset" class="btn-ghost">クリア</button>
+      </div>
+    </form>
+
+    <dialog id="confirm-dialog" class="confirm-dialog">
+      <form method="dialog">
+        <h2>入力内容の確認</h2>
+        <div id="confirm-body" class="confirm-body"></div>
+        <div class="dialog-actions">
+          <button type="submit" value="cancel" class="btn-ghost">戻る</button>
+          <button type="submit" value="ok" class="btn-primary">送信する</button>
+        </div>
+      </form>
+    </dialog>

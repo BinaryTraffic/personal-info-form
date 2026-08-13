@@ -1,0 +1,12 @@
+node_modules/
+.cursor/
+.DS_Store
+*.log
+*.tgz
+.env
+.env.*
+
+# 全銀マスタ生成物（npm run sync:zengin / postinstall で再生成）
+reference/zengin/banks.json
+reference/zengin/meta.json
+reference/zengin/branches/

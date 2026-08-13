@@ -1,0 +1,28 @@
+/* Brand theme (default) — current green look */
+:root,
+[data-theme="brand"] {
+  --ink: #1a2421;
+  --ink-muted: #4a5a55;
+  --paper: #e8efec;
+  --surface: rgba(255, 255, 255, 0.86);
+  --line: #c5d4ce;
+  --accent: #1f6f5b;
+  --accent-deep: #0f4a3c;
+  --accent-soft: #d4ebe3;
+  --warn: #9a3412;
+  --focus: #2a8f75;
+  --valid: #198754;
+  --valid-border: #198754;
+  --invalid: #dc3545;
+  --invalid-border: #dc3545;
+  --radius: 10px;
+  --shadow: 0 12px 40px rgba(15, 40, 32, 0.08);
+  --font: "IBM Plex Sans JP", "IBM Plex Sans", sans-serif;
+  --control-h: 56px;
+  --page-bg:
+    radial-gradient(ellipse 80% 50% at 10% -10%, #c8ddd4 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 0%, #d5e4df 0%, transparent 50%),
+    linear-gradient(165deg, #dfe8e4 0%, var(--paper) 40%, #d2ddd8 100%);
+  --btn-primary-bg: linear-gradient(180deg, #27856d 0%, var(--accent-deep) 100%);
+  --btn-primary-border: var(--accent-deep);
+}
